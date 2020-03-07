@@ -5,7 +5,7 @@
 - Need pygame and python 2
 
 ## How to play
-1) navigate to the alien_invasion folder and run: 
+Navigate to the alien_invasion folder and run: 
 ```bash
 python2 -c 'import alien_invasion; alien_invasion.run_game()'
 ```
