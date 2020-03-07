@@ -1,0 +1,31 @@
+import pygame #working with pygame
+from pygame.sprite import Sprite #Importing the Sprite class from the sprite module
+
+class BulletSideways(Sprite): #format is... 'class ChildClass(ParentClass):'
+    """A class that manages bullets fired from the ship"""
+    def __init__(self,ai_settings,screen,ship):
+        """Creating bullet object at ship's current position, initializing attributes"""
+        super(BulletSideways,self).__init__() #format is... 'super(ChildClass,self).__init__()' ... when working with a class in a class
+        self.screen = screen #Initializing the screen attribute
+
+        #Creating the bullet rect starting at (0,0) then setting current position
+        self.rect = pygame.Rect(0,0, ai_settings.bullet_height,ai_settings.bullet_width) #building bullet not based on an image, but by scratch.
+        self.rect.centery = ship.rect.centery #Positioning the bullet's center y coordinate at the same place as the ships
+        self.rect.right = ship.rect.right #Positioning the right of the bullet at the same place as the right of the ship
+
+        #Storing the bullets position as a decimal (cuz rect can't work with decimals)
+        self.x = float(self.rect.x)
+
+        #Initializing color and speed factor values
+        self.color = ai_settings.bullet_color
+        self.speed_factor = ai_settings.bullet_speed_factor
+
+    def update(self):
+        """Moves the bullet right on the screen"""
+        self.x += self.speed_factor #Updates position of the bullet more right on the screen
+        self.rect.x = self.x #Updates the rect position
+
+    def draw_bullet(self):
+        """Draw the bullet on the screen"""
+        pygame.draw.rect(self.screen,self.color,self.rect)
+
